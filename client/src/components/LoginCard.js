@@ -23,7 +23,7 @@ function LoginCard(props) {
   const { classes } = props;
   return (
     <Card className={classes.card}>
-      <Link to={'/login'}>
+      <Link to={'/users'}>
         <CardContent>
           <Typography className={classes.title}>
             Login

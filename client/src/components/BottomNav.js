@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+import { Redirect } from 'react-router-dom'
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import HomeIcon from '@material-ui/icons/Home';
@@ -19,14 +20,25 @@ class BottomNav extends React.Component {
   state = {
     value: 0,
   };
-
+  
   handleChange = (event, value) => {
     this.setState({ value });
   };
 
+  goBack = () => {
+    window.history.back()
+  }
+
+  goHome = () => {
+    this.setState({redirect: true})
+  }
+
   render() {
     const { classes } = this.props;
     const { value } = this.state;
+    if (this.state.redirect) {
+      return <Redirect to='/'/>
+    }
 
     return (
       <BottomNavigation
@@ -35,8 +47,9 @@ class BottomNav extends React.Component {
         showLabels
         className={classes.root}
       >
-        <BottomNavigationAction label="Go Back" icon={<RestoreIcon />} />
-        <BottomNavigationAction label="Home" icon={<HomeIcon/>} />
+      
+        <BottomNavigationAction label="Go Back" icon={<RestoreIcon />} onClick={() => {this.goBack()}}/>
+        <BottomNavigationAction label="Home" icon={<HomeIcon/>} onClick={() => {this.goHome()}}/>
         <BottomNavigationAction label="Add to Wish List" icon={<FavoriteIcon />} />
         
       </BottomNavigation>

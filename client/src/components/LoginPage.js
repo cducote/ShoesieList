@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
-import BottomNav from './BottomNav'
-import Header from './Header'
 import styled from 'styled-components'
+import Header from './Header'
+import BottomNav from './BottomNav';
+
 
 const Body = styled.div`
   display: column;
@@ -37,18 +38,20 @@ export default class LoginPage extends Component {
 
     const usersList = this.state.users.map((user, i) => {
       return (
-        <UserBox key={i}>
-         <Link to={`/login/${user._id}`}> {user.name} </Link>
-        </UserBox>
+        <Link to={`/login/${user._id}`}>
+          <UserBox key={i}>
+            {user.name}
+          </UserBox>
+        </Link>
       )
     })
 
     return (
       <div>
         <Header/>
-        <Body>
-        <UserContainer>{usersList}</UserContainer>
-        </Body>
+          <Body>
+            <UserContainer>{usersList}</UserContainer>
+          </Body>
         <BottomNav/>
       </div>
     )

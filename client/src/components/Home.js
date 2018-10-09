@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import BottomNav from './BottomNav';
-import Header from './Header'
 import LoginCard from './LoginCard';
 import LoginContainer from './LoginContainer';
+import Header from './Header'
+import BottomNav from './BottomNav';
 
 class Home extends Component {
   render() {
