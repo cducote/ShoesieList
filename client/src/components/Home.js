@@ -4,8 +4,6 @@ import Header from './Header'
 import LoginCard from './LoginCard';
 import LoginContainer from './LoginContainer';
 
-
-
 class Home extends Component {
   render() {
     return (
