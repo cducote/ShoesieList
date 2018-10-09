@@ -11,19 +11,11 @@ const styles = {
     minWidth: 275,
     maxWidth: 600,
   },
-  bullet: {
-    display: 'inline-block',
-    margin: '0 2px',
-    transform: 'scale(0.8)',
-  },
   title: {
-    fontSize: 25,
+    fontSize: 40,
     fontFamily: "Damion",
     textAlign: "center",
     color: "black"
-  },
-  pos: {
-    marginBottom: 12,
   },
 };
 
@@ -31,13 +23,13 @@ function LoginCard(props) {
   const { classes } = props;
   return (
     <Card className={classes.card}>
-      <CardContent>
-        <br/><br/>
-        <Typography className={classes.title} color="textSecondary" gutterBottom>
-         <Link to={'/users'}>Login</Link> 
-        </Typography>
-        <br/><br/>
-      </CardContent>
+      <Link to={'/login'}>
+        <CardContent>
+          <Typography className={classes.title}>
+            Login
+          </Typography>
+        </CardContent>
+      </Link>
     </Card>
   );
 }
