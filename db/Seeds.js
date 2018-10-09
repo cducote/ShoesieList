@@ -9,7 +9,7 @@ const { User, Shoe } = Schema
 
 const chris = new User({
   name: 'Chris',
-  shoes: []
+  wishList: []
 })
 
 const nike = new Shoe({
@@ -20,9 +20,12 @@ const nike = new Shoe({
 })
 
 User.deleteMany({})
-  .then(() => chris.shoes.push(nike._id))
-  .then(() => nike.wishers.push(chris._id))
+  .then(() => chris.wishList.push(nike._id))
   .then(() => chris.save())
+
+
+Shoe.deleteMany({})
+  .then(() => nike.wishers.push(chris._id))
   .then(() => nike.save())
   .then(() => console.log('Successful Save'))
   .then(() => mongoose.connection.close())

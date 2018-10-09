@@ -3,7 +3,7 @@ const Schema = mongoose.Schema
 
 const UserSchema = new Schema({
   name: String,
-  shoes: [{ type: Schema.Types.ObjectId, ref: 'Shoe'}]
+  wishList: [{ type: Schema.Types.ObjectId, ref: 'Shoe'}]
 })
 
 const ShoeSchema = new Schema({

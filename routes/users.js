@@ -1,9 +1,9 @@
-var express = require('express');
-var router = express.Router({ mergeParams: true})
+const express = require('express');
+const router = express.Router({ mergeParams: true})
 
 const { User }  = require('../db/Schema')
 
-
+//Show
 router.get('/', async (req, res) => {
   const users = await User.find()
   res.send(users)

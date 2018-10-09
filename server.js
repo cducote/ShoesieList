@@ -29,9 +29,11 @@ app.get('/', (req, res) => {
 })
 
 const usersController = require('./routes/users')
+const shoeListController = require('./routes/shoelist')
 
 
 app.use('/api/users', usersController)
+app.use('/api/shoelist', shoeListController)
 
 
 module.exports = app;
