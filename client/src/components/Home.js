@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import BottomNav from './BottomNav';
 import Header from './Header'
+import LoginCard from './LoginCard';
+import LoginContainer from './LoginContainer';
+
 
 
 class Home extends Component {
@@ -8,7 +11,9 @@ class Home extends Component {
     return (
       <div>
         <Header/>
-          Stuff
+          <LoginContainer>
+          <LoginCard/>
+          </LoginContainer>
         <BottomNav/>
       </div>
     );
