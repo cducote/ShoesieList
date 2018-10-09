@@ -16,9 +16,6 @@ connection.on('error', (err) => {
   console.log('Mongoose default connection error: ' + err)
 })
 
-var indexRouter = require('./routes');
-var usersRouter = require('./routes/users');
-
 var app = express();
 
 app.use(logger('dev'));
@@ -27,11 +24,14 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(`${__dirname}/client/build`))
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-
 app.get('/', (req, res) => {
   res.sendFile(`${__dirname}/client/build/index.html`)
 })
+
+const usersController = require('./routes/users')
+
+
+app.use('/api/users', usersController)
+
 
 module.exports = app;
