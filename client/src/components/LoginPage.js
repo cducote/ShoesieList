@@ -26,11 +26,29 @@ export default class LoginPage extends Component {
 
   state = {
     users:[],
+    newUser: {
+      name: '',
+      wishList: []
+    }
   }
 
   componentDidMount = async () => {
     const response = await axios.get('/api/users')
     this.setState({ users: response.data })
+  }
+
+  handleChange = (e) => {
+    const newUser = { ...this.state.newUser }
+    newUser[e.target.name] = e.target.value
+    this.setState({ newUser })
+  }
+
+  handleSubmit = async (e) => {
+    e.preventDefault()
+    const response = await axios.post('/api/users', this.state.newUser)
+    const users = [ ...this.state.users ]
+    users.push(response.data)
+    this.setState({ users })
   }
 
   render() {
@@ -48,7 +66,18 @@ export default class LoginPage extends Component {
     return (
       <div>
           <Body>
-            <UserContainer>{usersList}</UserContainer>
+            <UserContainer>
+              {usersList}
+            </UserContainer>
+            <form onSubmit={this.handleSubmit}>
+              <input
+                type='text'
+                name='name'
+                value={this.state.newUser.name}
+                onChange={this.handleChange}/>
+              
+              <input type='submit' value='Create New User'/>
+            </form>
           </Body>
       </div>
     )
