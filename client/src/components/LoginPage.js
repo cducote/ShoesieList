@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import styled from 'styled-components'
-import Header from './Header'
-import BottomNav from './BottomNav';
 
 
 const Body = styled.div`
@@ -38,7 +36,7 @@ export default class LoginPage extends Component {
 
     const usersList = this.state.users.map((user, i) => {
       return (
-        <Link to={`/login/${user._id}`}>
+        <Link to={`/user/${user._id}`}>
           <UserBox key={i}>
             {user.name}
           </UserBox>
@@ -48,11 +46,9 @@ export default class LoginPage extends Component {
 
     return (
       <div>
-        <Header/>
           <Body>
             <UserContainer>{usersList}</UserContainer>
           </Body>
-        <BottomNav/>
       </div>
     )
   }

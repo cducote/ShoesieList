@@ -25,13 +25,15 @@ class BottomNav extends React.Component {
     this.setState({ value });
   };
 
+  goHome = () => {
+    this.setState({redirect: true})
+  }
+
   goBack = () => {
     window.history.back()
   }
 
-  goHome = () => {
-    this.setState({redirect: true})
-  }
+ 
 
   render() {
     const { classes } = this.props;

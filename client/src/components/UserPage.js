@@ -5,6 +5,8 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import { Link } from 'react-router-dom'
+import Avatar from '@material-ui/core/Avatar';
+
 
 const styles = {
   card: {
@@ -26,7 +28,7 @@ function LoginCard(props) {
       <Link to={'/users'}>
         <CardContent>
           <Typography className={classes.title}>
-            Log in
+            <Avatar className={classes.avatar} alt="Username" src={"https://i.imgur.com/3nmeUWN.jpg"}/>
           </Typography>
         </CardContent>
       </Link>
