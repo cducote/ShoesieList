@@ -51,9 +51,7 @@ class ShoesieFaves extends React.Component {
       return (
         <GridListTile>
             <img
-              src={
-                "https://asphaltgold.de/media/catalog/product/cache/1/image/930x669/0f396e8a55728e79b48334e699243c07/n/e/new-balance-wrl420ea-bone-wrl420ea-1.jpg"
-              }
+              src={shoe.img}
               alt={"A Neat Shoe"}
             />
             <GridListTileBar

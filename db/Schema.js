@@ -10,6 +10,7 @@ const ShoeSchema = new Schema({
   name: String,
   brand: String,
   Price: Number,
+  img: String,
   wishers: [{ type: Schema.Types.ObjectId, ref: 'User'}]
 })
 

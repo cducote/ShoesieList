@@ -16,6 +16,7 @@ const nike = new Shoe({
   name: 'Free-Run',
   brand: 'Nike',
   Price: 99.99,
+  img: 'https://www.sneakerhouse.pl/images/classics/3000-4000/Nike-Free-RN_%5B3898%5D_1200.jpg',
   wishers: []
 })
 
