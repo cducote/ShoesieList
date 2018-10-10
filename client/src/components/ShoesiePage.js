@@ -50,10 +50,7 @@ class ShoesieFaves extends React.Component {
     const favesList = this.state.shoes.map((shoe, i) => {
       return (
         <GridListTile>
-            <img
-              src={shoe.img}
-              alt={"A Neat Shoe"}
-            />
+            <img src={shoe.img} alt={"A Neat Shoe"}/>
             <GridListTileBar
               title={shoe.brand}
               subtitle={shoe.name}
