@@ -6,6 +6,7 @@ import GridListTileBar from "@material-ui/core/GridListTileBar";
 import ListSubheader from "@material-ui/core/ListSubheader";
 import IconButton from "@material-ui/core/IconButton";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
+import axios from 'axios'
 
 const styles = theme => ({
   root: {
@@ -34,11 +35,42 @@ const styles = theme => ({
 class ShoesieFaves extends React.Component {
 
   state = {
-    shoes: {}
+    shoes: [],
+  }
+
+  componentDidMount = async () => {
+    const response = await axios.get('/api/shoelist/')
+    console.log('response from api', response)
+    this.setState({ shoes: response.data })
   }
 
   render() {
     const { classes } = this.props;
+
+    const favesList = this.state.shoes.map((shoe, i) => {
+      return (
+        <GridListTile>
+            <img
+              src={
+                "https://asphaltgold.de/media/catalog/product/cache/1/image/930x669/0f396e8a55728e79b48334e699243c07/n/e/new-balance-wrl420ea-bone-wrl420ea-1.jpg"
+              }
+              alt={"A Neat Shoe"}
+            />
+            <GridListTileBar
+              title={shoe.brand}
+              subtitle={shoe.name}
+              actionIcon={
+                <IconButton>
+                  <StarBorderIcon
+                    className={classes.title}
+                    style={{ color: "#f1f1f1" }}
+                  />
+                </IconButton>
+              }
+            />
+          </GridListTile>
+      )
+    })
 
     return (
       <div className={classes.root}>
@@ -48,27 +80,7 @@ class ShoesieFaves extends React.Component {
               Top Picks
             </ListSubheader>
           </GridListTile>
-
-          <GridListTile>
-            <img
-              src={
-                "https://asphaltgold.de/media/catalog/product/cache/1/image/930x669/0f396e8a55728e79b48334e699243c07/n/e/new-balance-wrl420ea-bone-wrl420ea-1.jpg"
-              }
-              alt={"Hey"}
-            />
-            <GridListTileBar
-              title={"Hey"}
-              subtitle={<span>It's Bill</span>}
-              actionIcon={
-                <IconButton>
-                  <StarBorderIcon
-                    className={classes.title}
-                    style={{ color: "#8B8C8D" }}
-                  />
-                </IconButton>
-              }
-            />
-          </GridListTile>
+          {favesList}
         </GridList>
       </div>
     );
