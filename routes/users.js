@@ -11,7 +11,7 @@ router.get('/', async (req, res) => {
 
 //Show One
 router.get('/:id', async (req, res) => {
-  const user = await User.findById(req.params.id)
+  const user = await User.findById(req.params.id).populate('wishList')
   res.send(user)
 })
 

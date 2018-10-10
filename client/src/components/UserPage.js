@@ -4,10 +4,10 @@ import { withStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
-import { Link } from "react-router-dom";
 import Avatar from "@material-ui/core/Avatar";
 import styled from "styled-components";
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 
 const Body = styled.div`
   display: column;
@@ -52,7 +52,7 @@ class UserPage extends React.Component {
 
   render() {
     const { classes } = this.props
-
+    const userId = this.state.user._id
     const wishListCard = this.state.wishList.map(( shoe, i ) => {
       return (
         <Card className={classes.card} key={i}>
@@ -81,9 +81,9 @@ class UserPage extends React.Component {
           </CardContent>
         </Card>
         {wishListCard}
-
+        
         <div>
-          <Link to={'/shoesiefaves'}>Shoesie Faves</Link>
+        <Link to={`/user/${userId}/shoesiefaves`}> Shoesie Faves </Link>
         </div>
       </Body>
     );

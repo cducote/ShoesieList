@@ -17,8 +17,8 @@ class App extends Component {
               <Switch>
                 <Route exact path='/' component={Home}/>
                 <Route exact path='/users' component={LoginPage} />
-                <Route exacty path='/user/:userId' component={UserPage}/>
-                <Route exact path='/user/:usuerId/shoelist' component={ShoesiePage}/>
+                <Route exact path='/user/:userId' component={UserPage}/>
+                <Route exact path='/user/:userId/shoesiefaves' component={ShoesiePage}/>
               </Switch>
             <BottomNav/>
           </div>
