@@ -49,7 +49,7 @@ class ShoesieFaves extends React.Component {
 
     const favesList = this.state.shoes.map((shoe, i) => {
       return (
-        <GridListTile>
+        <GridListTile key={i}>
             <img src={shoe.img} alt={"A Neat Shoe"}/>
             <GridListTileBar
               title={shoe.brand}

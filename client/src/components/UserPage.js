@@ -9,10 +9,30 @@ import styled from "styled-components";
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 
+
 const Body = styled.div`
-  display: column;
+  display: flex;
   padding: 50px;
-`;
+  justify-content: center;
+`
+const Img = styled.img`
+  border-radius: 50%;
+  width: 20%;
+  height: 20%;
+  min-height: 20px;
+  min-width: 20px;
+`
+const UserInfo = styled.div`
+  padding: 40px, 40px, 40px, 0;
+  font-size: 30px;
+  display: flex;
+  flex-grow: 0.65;
+  flex-direction: column;
+  line-height: 40px;
+  align-items: center;
+  justify-content: center;
+`
+
 const styles = {
   card: {
     minWidth: 275,
@@ -55,8 +75,14 @@ class UserPage extends React.Component {
     const userId = this.state.user._id
     const wishListCard = this.state.wishList.map(( shoe, i ) => {
       return (
-        <Card className={classes.card} key={i}>
+        <Card className={classes.card}>
           <CardContent className={classes.cardcontent}>
+          <Typography>
+               <Avatar
+                alt="shoe"
+                src={shoe.img}
+              />
+            </Typography>
             <Typography>
             {shoe.name}
             </Typography>
@@ -66,26 +92,20 @@ class UserPage extends React.Component {
     })
 
     return (
+      <div>
       <Body>
-        <Card className={classes.card}>
-          <CardContent className={classes.cardcontent}>
-          <Typography>
-               <Avatar
-                alt="Username"
-                src={this.state.user.avatar}
-              />
-            </Typography>
-            <Typography>
-            {this.state.user.name}
-            </Typography>
-          </CardContent>
-        </Card>
+        <Img src={this.state.user.avatar}/>
+        <UserInfo>
+          {this.state.user.name}
+        </UserInfo>
+      </Body>
+      
         {wishListCard}
         
         <div>
         <Link to={`/user/${userId}/shoesiefaves`}> Shoesie Faves </Link>
         </div>
-      </Body>
+      </div>
     );
   }
 }
