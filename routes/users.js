@@ -23,7 +23,17 @@ router.post('/', async (req, res) => {
 
 // Update
 router.put('/:id', async (req, res) => {
-  const user = await User.findByIdAndUpdate(req.params.id, req.body, { new: true })
+  const user = await User.findById(req.params.id)
+  if (req.body.name) {
+    user.name = req.body.name 
+  } 
+  if (req.body.avatar) {
+    user.avatar = req.body.avatar
+  }
+  if (req.body.aNewShoe){
+    user.wishList.push(req.body.aNewShoe)
+  }
+  user = await user.save()
   res.send(user)
 })
 

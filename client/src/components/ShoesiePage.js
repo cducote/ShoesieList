@@ -36,18 +36,50 @@ class ShoesieFaves extends React.Component {
 
   state = {
     shoes: [],
+    user: {
+      wishList: []
+    }
+  }
+
+  getUser = async () => {
+    const userId = this.props.match.params.userId
+    const response = await axios.get(`/api/users/${userId}`)
+    this.setState({
+      user: response.data,
+      wishList: response.data.wishList
+    })
   }
 
   componentDidMount = async () => {
+    this.getUser()
     const response = await axios.get('/api/shoelist/')
-    console.log('response from api', response)
-    this.setState({ shoes: response.data })
+    this.setState({ 
+      shoes: response.data,
+     })
   }
 
+  handleAdd = async (shoe) => {
+    console.log(shoe)
+    const userId = this.props.match.params.userId
+    console.log(userId)
+    const response = await axios.put(`/api/users/${userId}`, {aNewShoe: shoe._id})
+    console.log(response)
+
+    await this.getUser()
+  }
+
+  // handleChange =  async (e, i) => {
+  //   e.preventDefault()
+  //   // const userId = this.props.match.params.userId
+  //   const wishList = [ ...this.state.user.wishList]
+  //   wishList[i][e.target.shoe] = e.target.value
+  //   this.setState({ wishList })
+  // }
   render() {
     const { classes } = this.props;
 
     const favesList = this.state.shoes.map((shoe, i) => {
+
       return (
         <GridListTile key={i}>
             <img src={shoe.img} alt={"A Neat Shoe"}/>
@@ -57,8 +89,10 @@ class ShoesieFaves extends React.Component {
               actionIcon={
                 <IconButton>
                   <StarBorderIcon
+                    onClick={() => this.handleAdd(shoe)}
                     className={classes.title}
                     style={{ color: "#f1f1f1" }}
+                    value='shoe'
                   />
                 </IconButton>
               }
