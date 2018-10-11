@@ -64,6 +64,7 @@ class LoginPage extends Component {
     users: [],
     newUser: {
       name: '',
+      avatar: '',
       wishList: []
     },
     toggleNewUserView: true
@@ -94,7 +95,7 @@ class LoginPage extends Component {
               <Typography>
                 <Avatar
                   alt="pic"
-                  src={"https://i.imgur.com/3nmeUWN.jpg"}
+                  src={user.avatar}
                 />
               </Typography>
               <Typography className={classes.username}>
@@ -126,17 +127,7 @@ class LoginPage extends Component {
           <NewUserForm/>
           }
         </AddButton>
-        
-        
-        
-      </div>
-  // <div>
-  //   {this.state.toggleNewUserView ? 
-  //   ("this is the true statement"  <button onclick=this.toggleView>Change my mind</button>) : 
-  //   ("this is the false statement")
-  
-  //   }
-  // </div>
+         </div>
     )
   }
 }

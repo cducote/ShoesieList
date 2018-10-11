@@ -20,6 +20,7 @@ class NewUserForm extends Component {
     users: [],
     newUser: {
       name: '',
+      avatar: '',
       wishList: []
     }
   }
@@ -57,9 +58,9 @@ class NewUserForm extends Component {
             <Grid item>
               <TextField id="input-with-icon-grid" label="User Name" name='name' value={this.state.newUser.name} onChange={this.handleChange} />
             </Grid>
-            {/* <Grid item>
+            <Grid item>
                 <TextField id="input-with-icon-grid" label="Avatar Link" name='avatar' value={this.state.newUser.avatar} onChange={this.handleChange}/>
-                </Grid> */}
+                </Grid>
             <Grid Item>
               <Button variant="fab" mini color="secondary" aria-label="Add" className={classes.button} type='submit' >
                 <AddIcon onClick={this.props.toggleNew}/>

@@ -9,6 +9,7 @@ const { User, Shoe } = Schema
 
 const chris = new User({
   name: 'Chris',
+  avatar: 'https://scontent-atl3-1.cdninstagram.com/vp/1623f8b6cdf07e7b681798de55af0f38/5C4AA37D/t51.2885-19/s320x320/25006611_2000806196840068_6208027273887481856_n.jpg',
   wishList: []
 })
 

@@ -3,6 +3,7 @@ const Schema = mongoose.Schema
 
 const UserSchema = new Schema({
   name: String,
+  avatar: String,
   wishList: [{ type: Schema.Types.ObjectId, ref: 'Shoe'}]
 })
 

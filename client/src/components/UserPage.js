@@ -72,7 +72,7 @@ class UserPage extends React.Component {
           <Typography>
                <Avatar
                 alt="Username"
-                src={"https://i.imgur.com/3nmeUWN.jpg"}
+                src={this.state.user.avatar}
               />
             </Typography>
             <Typography>
