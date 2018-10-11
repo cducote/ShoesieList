@@ -12,7 +12,6 @@ const ShoeSchema = new Schema({
   brand: String,
   Price: Number,
   img: String,
-  wishers: [{ type: Schema.Types.ObjectId, ref: 'User'}]
 })
 
 const UserModel = mongoose.model('User', UserSchema)

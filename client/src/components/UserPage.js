@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom'
 
 const Body = styled.div`
   display: flex;
-  padding: 50px;
+  margin: 30px;
   justify-content: center;
 `
 const Img = styled.img`
@@ -34,9 +34,29 @@ const UserInfo = styled.div`
 `
 
 const styles = {
+  root: {
+    background: "inherit",
+    height: "50vh"
+  },
+  bottomhalf: {
+    background: "#f1f1f1",
+    height: "10vh",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    margin: "auto",
+    overflowY: "auto",
+    minHeight: "200px",
+    maxHeight: "40vh",
+    paddingTop: 200,
+  },
   card: {
     minWidth: 275,
-    maxWidth: 600
+    maxWidth: 350,
+    maxHeight: 85,
+    minHeight: 85,
+    margin: 2,
   },
   title: {
     fontSize: 40,
@@ -46,6 +66,17 @@ const styles = {
   },
   cardcontent: {
     display: "flex",
+    alignItems: "center",
+  },
+  shoename: {
+    display: "flex",
+    paddingLeft: "65px",
+    flexGrow: 2,
+    textAlign: "center"
+  },
+  faves: {
+    display: "flex",
+    justifyContent: "center",
     alignItems: "center",
   }
 };
@@ -73,38 +104,40 @@ class UserPage extends React.Component {
   render() {
     const { classes } = this.props
     const userId = this.state.user._id
-    const wishListCard = this.state.wishList.map(( shoe, i ) => {
+    const wishListCard = this.state.wishList.map((shoe, i) => {
       return (
         <Card className={classes.card}>
           <CardContent className={classes.cardcontent}>
-          <Typography>
-               <Avatar
+            <Typography>
+              <Avatar
                 alt="shoe"
                 src={shoe.img}
               />
             </Typography>
-            <Typography>
-            {shoe.name}
-            </Typography>
+            
+              <div className={classes.shoename}>{shoe.name}</div>
+            
           </CardContent>
         </Card>
       )
     })
 
     return (
-      <div>
-      <Body>
-        <Img src={this.state.user.avatar}/>
-        <UserInfo>
-          {this.state.user.name}
-        </UserInfo>
-      </Body>
-      
-        {wishListCard}
-        
-        <div>
-        <Link to={`/user/${userId}/shoesiefaves`}> Shoesie Faves </Link>
+      <div className={classes.root}>
+        <Body>
+          <Img src={this.state.user.avatar} />
+          <UserInfo>
+            {this.state.user.name}
+          </UserInfo>
+        </Body>
+        <div className={classes.bottomhalf}>
+          {wishListCard}
         </div>
+        <div className={classes.faves}>
+            <div>
+              <Link to={`/user/${userId}/shoesiefaves`}> Shoesie Faves </Link>
+            </div>
+          </div>
       </div>
     );
   }
