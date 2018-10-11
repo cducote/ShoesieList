@@ -27,7 +27,7 @@ const styles = theme => ({
   },
   header: {
     fontSize: "30px",
-    fontFamily: "Damion",
+    fontFamily: "Quicksand",
     color: "black",
     textAlign: "center"
   }

@@ -2,34 +2,71 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import styled from 'styled-components'
-
-
+import { withStyles } from "@material-ui/core/styles";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
+import Typography from "@material-ui/core/Typography";
+import Avatar from "@material-ui/core/Avatar";
+import AccountCircle from '@material-ui/icons/AccountCircle';
+import TextField from '@material-ui/core/TextField';
+import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
+import AddIcon from '@material-ui/icons/Add';
+import NewUserForm from './NewUserForm'
 
 const Body = styled.div`
-  display: column;
+  display: flex;
+  justify-content: center;
   padding: 50px;
+  align-items: center;
+  height: 30vh;
+  overflow: scroll;
+  margin-top: 10px;
+`
+const AddButton = styled.div`
+display: flex;
+justify-content: center;
 `
 
 const UserContainer = styled.div`
-  display: colomn;
+  display: column;
   font-size: 24px;
+  height: 340px;
 `
-const UserBox = styled.div`
-  border: 1px solid black;
-  padding: 10px;
-  margin: 5px;
-  border-radius: 40px;
+const PageHead = styled.div`
+  text-align: center;
+  font-family: "Quicksand";
+  font-size: 38px;
 `
 
+const styles = {
+  card: {
+    minWidth: 400,
+    maxWidth: 400,
+    margin: "4px"
+  },
+  cardcontent: {
+    display: "flex",
+  },
+  username: {
+    display: "flex",
+    justifyContent: "center",
+    flexGrow: .85,
+    alignSelf: "center",
+    fontSize: "24px",
+    fontFamily: "Quicksand"
+  }
+};
 
-export default class LoginPage extends Component {
+class LoginPage extends Component {
 
   state = {
-    users:[],
+    users: [],
     newUser: {
       name: '',
       wishList: []
-    }
+    },
+    toggleNewUserView: true
   }
 
   componentDidMount = async () => {
@@ -37,49 +74,72 @@ export default class LoginPage extends Component {
     this.setState({ users: response.data })
   }
 
-  handleChange = (e) => {
-    const newUser = { ...this.state.newUser }
-    newUser[e.target.name] = e.target.value
-    this.setState({ newUser })
-  }
+  toggleNew = () => {
+    this.setState({
+      toggleNewUserView: !this.state.toggleNewUserView
+    })
 
-  handleSubmit = async (e) => {
-    e.preventDefault()
-    const response = await axios.post('/api/users', this.state.newUser)
-    const users = [ ...this.state.users ]
-    users.push(response.data)
-    this.setState({ users })
   }
+  // update list of users
+
 
   render() {
-
+    const { classes } = this.props
     const usersList = this.state.users.map((user, i) => {
       return (
+
         <Link to={`/user/${user._id}`}>
-          <UserBox key={i}>
-            {user.name}
-          </UserBox>
+          <Card className={classes.card} key={i}>
+            <CardContent className={classes.cardcontent}>
+              <Typography>
+                <Avatar
+                  alt="pic"
+                  src={"https://i.imgur.com/3nmeUWN.jpg"}
+                />
+              </Typography>
+              <Typography className={classes.username}>
+                {user.name}
+              </Typography>
+            </CardContent>
+          </Card>
         </Link>
       )
     })
 
     return (
       <div>
-          <Body>
-            <UserContainer>
-              {usersList}
-            </UserContainer>
-            <form onSubmit={this.handleSubmit}>
-              <input
-                type='text'
-                name='name'
-                value={this.state.newUser.name}
-                onChange={this.handleChange}/>
-              
-              <input type='submit' value='Create New User'/>
-            </form>
-          </Body>
+        <PageHead>
+          Users
+        </PageHead>
+        <Body>
+          <UserContainer>
+            {usersList}
+          </UserContainer>
+          
+        </Body>
+        <AddButton>
+          {this.state.toggleNewUserView ?
+          <Button variant="fab" color="primary" aria-label="Add" className={classes.button} onClick={this.toggleNew}>
+            <AddIcon />
+          </Button> :
+
+          <NewUserForm/>
+          }
+        </AddButton>
+        
+        
+        
       </div>
+  // <div>
+  //   {this.state.toggleNewUserView ? 
+  //   ("this is the true statement"  <button onclick=this.toggleView>Change my mind</button>) : 
+  //   ("this is the false statement")
+  
+  //   }
+  // </div>
     )
   }
 }
+
+
+export default withStyles(styles)(LoginPage)
