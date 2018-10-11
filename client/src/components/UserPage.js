@@ -8,6 +8,10 @@ import Avatar from "@material-ui/core/Avatar";
 import styled from "styled-components";
 import axios from 'axios'
 import { Link } from 'react-router-dom'
+import Icon from '@material-ui/core/Icon';
+import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
 
 
 const Body = styled.div`
@@ -34,13 +38,13 @@ const UserInfo = styled.div`
 `
 
 const styles = {
-  root: {
-    background: "inherit",
-    height: "50vh"
-  },
+  // root: {
+  //   background: "inherit",
+  //   height: "50vh"
+  // },
   bottomhalf: {
     background: "#f1f1f1",
-    height: "10vh",
+    height: "40vh",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
@@ -49,7 +53,6 @@ const styles = {
     overflowY: "auto",
     minHeight: "200px",
     maxHeight: "40vh",
-    paddingTop: 200,
   },
   card: {
     minWidth: 275,
@@ -78,6 +81,8 @@ const styles = {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    flexDirection: "column",
+    padding: "25px"
   }
 };
 
@@ -85,7 +90,8 @@ class UserPage extends React.Component {
 
   state = {
     user: {},
-    wishList: []
+    wishList: [],
+    toggleEditView: true
   }
 
   getUser = async () => {
@@ -93,8 +99,18 @@ class UserPage extends React.Component {
     const response = await axios.get(`/api/users/${userId}`)
     this.setState({
       user: response.data,
-      wishList: response.data.wishList.reverse()
+      wishList: response.data.wishList
     })
+  }
+
+  handleToggleEdit = () => {
+    this.setState({toggleEditView: !this.state.toggleEditView})
+  }
+
+  handleDelete = async () => {
+    const userId = this.props.match.params.userId
+    axios.delete(`/api/users/${userId}`)
+    await this.getUser()
   }
 
   componentDidMount = () => {
@@ -114,13 +130,14 @@ class UserPage extends React.Component {
                 src={shoe.img}
               />
             </Typography>
-            
-              <div className={classes.shoename}>{shoe.name}</div>
-            
+
+            <div className={classes.shoename}>{shoe.name}</div>
+
           </CardContent>
         </Card>
       )
     })
+
 
     return (
       <div className={classes.root}>
@@ -128,22 +145,50 @@ class UserPage extends React.Component {
           <Img src={this.state.user.avatar} />
           <UserInfo>
             {this.state.user.name}
+            
+              {this.state.toggleEditView ?
+                <IconButton
+                  variant="fab"
+                  color="secondary"
+                  aria-label="Edit"
+                  className={classes.button}
+                  onClick={this.handleToggleEdit}>
+                  <EditIcon />
+                </IconButton> 
+                  :
+                  <form>
+                  <input type="text" value={this.state.user.name} />
+                  <input type='submit'/>
+                </form>
+
+              }
+            
+
           </UserInfo>
+            <IconButton className={classes.button} aria-label="Delete">
+              <Link to={`/users`}>
+                <DeleteIcon
+                  onClick={() => this.handleDelete(userId)} />
+              </Link>
+            </IconButton>
         </Body>
-        <div className={classes.bottomhalf}>
-          {wishListCard}
-        </div>
-        <div className={classes.faves}>
+          <div className={classes.bottomhalf}>
+            {wishListCard}
+          </div>
+          <div className={classes.faves}>
             <div>
               <Link to={`/user/${userId}/shoesiefaves`}> Shoesie Faves </Link>
             </div>
+            <div>
+
+            </div>
           </div>
       </div>
-    );
-  }
-}
+        );
+      }
+    }
 UserPage.propTypes = {
-  classes: PropTypes.object.isRequired
-};
-
-export default withStyles(styles)(UserPage);
+          classes: PropTypes.object.isRequired
+      };
+      
+      export default withStyles(styles)(UserPage);

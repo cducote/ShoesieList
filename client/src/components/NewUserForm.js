@@ -37,7 +37,6 @@ class NewUserForm extends Component {
   }
 
   handleSubmit = async (e) => {
-    e.preventDefault()
     const response = await axios.post('/api/users', this.state.newUser)
     // call update users with new user
     const users = [ ...this.state.users ]
