@@ -28,7 +28,6 @@ const Img = styled.img`
     height: 100px;
     width: 100px;
   }
-  
 `
 const UserInfo = styled.div`
   padding: 20px, 20px, 20px, 0;
@@ -40,6 +39,11 @@ const UserInfo = styled.div`
   align-items: center;
   justify-content: center;
 `
+  const FaveLink = styled.div`
+  border: 1px solid black;
+  padding: 5px;
+  `
+
 
 const styles = {
   root: {
@@ -206,9 +210,9 @@ class UserPage extends React.Component {
           {wishListCard}
         </div>
         <div className={classes.faves}>
-          <div>
-            <Link to={`/user/${userId}/shoesiefaves`}> See Chrissys Top Picks </Link>
-          </div>
+          <FaveLink>
+            <Link to={`/user/${userId}/shoesiefaves`}> See Chris's Top Picks </Link>
+          </FaveLink>
           <div>
           </div>
         </div>
