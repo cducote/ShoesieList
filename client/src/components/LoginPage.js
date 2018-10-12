@@ -80,7 +80,6 @@ class LoginPage extends Component {
     this.setState({
       toggleNewUserView: !this.state.toggleNewUserView
     })
-
   }
  
   render() {
@@ -122,7 +121,6 @@ class LoginPage extends Component {
           <Button variant="fab" color="primary" aria-label="Add" className={classes.button} onClick={this.toggleNew}>
             <AddIcon />
           </Button> :
-
           <NewUserForm getUsers={this.getUsers}/>
           }
         </AddButton>

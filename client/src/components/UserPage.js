@@ -18,13 +18,18 @@ const Body = styled.div`
   display: flex;
   margin: 0px;
   justify-content: center;
+  
 `
 const Img = styled.img`
   border-radius: 50%;
-  width: 20%;
-  height: 20%;
+  width: 235px;
+  height: 235px;
   min-height: 20px;
-  min-width: 20px;
+  @media (max-width: 720px) {
+    height: 100px;
+    width: 100px;
+  }
+  
 `
 const UserInfo = styled.div`
   padding: 20px, 20px, 20px, 0;
@@ -38,22 +43,25 @@ const UserInfo = styled.div`
 `
 
 const styles = {
+  root: {
+    minHeight: "40px",
+    ['@media (min-width:780px)']: { // eslint-disable-line no-useless-computed-key
+      height: '30vh'
+    }
+  },
   bottomhalf: {
     background: "#f1f1f1",
     height: "40vh",
     display: "flex",
     flexDirection: "column",
-    // justifyContent: "center",
     alignItems: "center",
     margin: "auto",
     overflow: "auto",
-    // minHeight: "200px",
     maxHeight: "60vh",
     minHeight: "20px",
     ['@media (max-width:780px)']: { // eslint-disable-line no-useless-computed-key
       height: '80%'
     }
-    // paddingTop: "30px"
   },
   card: {
     minWidth: 275,
@@ -84,6 +92,11 @@ const styles = {
     alignItems: "center",
     flexDirection: "column",
     padding: "25px"
+  },
+  img: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
   }
 };
 
@@ -157,9 +170,12 @@ class UserPage extends React.Component {
 
 
     return (
-      <div className={classes.root}>
-        <Body>
+      <div>
+        <Body className={classes.root}>
+          <div className={classes.img}>
           <Img src={this.state.user.avatar} />
+          </div>
+          
           <UserInfo>
             {this.state.user.name}
 

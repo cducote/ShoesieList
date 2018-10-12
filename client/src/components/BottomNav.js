@@ -20,13 +20,13 @@ class BottomNav extends React.Component {
   state = {
     value: 0,
   };
-  
+
   handleChange = (event, value) => {
     this.setState({ value });
   };
 
   goHome = () => {
-    this.setState({redirect: true})
+    this.setState({ redirect: true })
   }
 
   goBack = () => {
@@ -34,13 +34,13 @@ class BottomNav extends React.Component {
     window.history.back()
   }
 
- 
+
 
   render() {
     const { classes } = this.props;
     const { value } = this.state;
     if (this.state.redirect) {
-      return <Redirect to='/'/>
+      return <Redirect to='/' />
     }
 
     return (
@@ -50,11 +50,11 @@ class BottomNav extends React.Component {
         showLabels
         className={classes.root}
       >
-      
-        <BottomNavigationAction label="Go Back" icon={<RestoreIcon />} onClick={() => {this.goBack()}}/>
-        <BottomNavigationAction label="Home" icon={<HomeIcon/>} onClick={() => {this.goHome()}}/>
+
+        <BottomNavigationAction label="Go Back" icon={<RestoreIcon />} onClick={() => { this.goBack() }} />
+        <BottomNavigationAction label="Home" icon={<HomeIcon />} onClick={() => { this.goHome() }} />
         <BottomNavigationAction label="Add to Wish List" icon={<FavoriteIcon />} />
-        
+
       </BottomNavigation>
     );
   }

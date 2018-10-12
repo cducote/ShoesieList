@@ -7,7 +7,7 @@ import ListSubheader from "@material-ui/core/ListSubheader";
 import IconButton from "@material-ui/core/IconButton";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
 import axios from 'axios'
-import { Link } from 'react-router-dom'
+
 
 const styles = theme => ({
   root: {
@@ -33,7 +33,7 @@ const styles = theme => ({
     textAlign: "center"
   }
 });
-class ShoesieFaves extends React.Component {
+class ShoesiePage extends React.Component {
 
   state = {
     shoes: [],
@@ -67,7 +67,6 @@ class ShoesieFaves extends React.Component {
 
   render() {
     const { classes } = this.props;
-    // const userId = this.props.match.params.userId
     const favesList = this.state.shoes.map((shoe, i) => {
 
       return (
@@ -77,7 +76,6 @@ class ShoesieFaves extends React.Component {
             title={shoe.brand}
             subtitle={shoe.name}
             actionIcon={
-              // <Link to={`/user/${userId}`}>
               <IconButton>
                 <StarBorderIcon
                   onClick={() => this.handleAdd(shoe)}
@@ -86,7 +84,6 @@ class ShoesieFaves extends React.Component {
                   value='shoe'
                 />
               </IconButton>
-              // </Link>
             }
           />
         </GridListTile>
@@ -108,4 +105,4 @@ class ShoesieFaves extends React.Component {
   }
 }
 
-export default withStyles(styles)(ShoesieFaves);
+export default withStyles(styles)(ShoesiePage);
