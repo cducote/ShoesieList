@@ -38,3 +38,4 @@ Once the user loads the home page, they are presented with a brief bio of the ap
 
   * individual pages for certain shoes, allowing user to press the favorite button on the bottom navigation to add a shoe they are viewing
   * solve some of the slow loading for the user page
+  * toggle admin view so i can add more shoes to the Top Picks list without seeding
