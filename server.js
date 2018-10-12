@@ -24,9 +24,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(`${__dirname}/client/build`))
 
-app.get('/', (req, res) => {
-  res.sendFile(`${__dirname}/client/build/index.html`)
-})
 
 const usersController = require('./routes/users')
 const shoeListController = require('./routes/shoelist')
@@ -35,5 +32,8 @@ const shoeListController = require('./routes/shoelist')
 app.use('/api/users', usersController)
 app.use('/api/shoelist', shoeListController)
 
+app.get('*', (req, res) => {
+  res.sendFile(`${__dirname}/client/build/index.html`)
+})
 
 module.exports = app;
