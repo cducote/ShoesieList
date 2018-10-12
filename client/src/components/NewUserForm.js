@@ -43,6 +43,7 @@ class NewUserForm extends Component {
     e.preventDefault()
     await axios.post('/api/users', this.state.newUser)
     this.props.getUsers()
+    this.props.toggleNew()
   }
 
   render() {
