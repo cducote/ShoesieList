@@ -6,7 +6,7 @@ const StyledContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 70vh;
+  height: 10vh;
 `
 
 export default class LoginContainer extends Component {
