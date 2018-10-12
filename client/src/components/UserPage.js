@@ -177,7 +177,7 @@ class UserPage extends React.Component {
           
           <UserInfo>
             {this.state.user.name}
-
+          
             {this.state.toggleEditView ?
               <IconButton
                 variant="fab"

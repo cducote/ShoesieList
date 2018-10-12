@@ -23,6 +23,8 @@ const Body = styled.div`
 const AddButton = styled.div`
 display: flex;
 justify-content: center;
+align-items: center;
+height: 30vh;
 `
 
 const UserContainer = styled.div`
@@ -116,6 +118,7 @@ class LoginPage extends Component {
           </UserContainer>
           
         </Body>
+        <div className={classes.addbutton}>
         <AddButton>
           {this.state.toggleNewUserView ?
           <Button variant="fab" color="primary" aria-label="Add" className={classes.button} onClick={this.toggleNew}>
@@ -124,6 +127,7 @@ class LoginPage extends Component {
           <NewUserForm getUsers={this.getUsers} toggleNew={this.toggleNew}/>
           }
         </AddButton>
+        </div>
          </div>
     )
   }
