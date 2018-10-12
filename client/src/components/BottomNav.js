@@ -50,11 +50,9 @@ class BottomNav extends React.Component {
         showLabels
         className={classes.root}
       >
-
         <BottomNavigationAction label="Go Back" icon={<RestoreIcon />} onClick={() => { this.goBack() }} />
         <BottomNavigationAction label="Home" icon={<HomeIcon />} onClick={() => { this.goHome() }} />
         <BottomNavigationAction label="Add to Wish List" icon={<FavoriteIcon />} />
-
       </BottomNavigation>
     );
   }
