@@ -16,7 +16,7 @@ import EditIcon from '@material-ui/icons/Edit';
 
 const Body = styled.div`
   display: flex;
-  margin: 30px;
+  margin: 0px;
   justify-content: center;
 `
 const Img = styled.img`
@@ -27,7 +27,7 @@ const Img = styled.img`
   min-width: 20px;
 `
 const UserInfo = styled.div`
-  padding: 40px, 40px, 40px, 0;
+  padding: 20px, 20px, 20px, 0;
   font-size: 30px;
   display: flex;
   flex-grow: 0.65;
@@ -47,12 +47,17 @@ const styles = {
     height: "40vh",
     display: "flex",
     flexDirection: "column",
-    justifyContent: "center",
+    // justifyContent: "center",
     alignItems: "center",
     margin: "auto",
-    overflowY: "auto",
-    minHeight: "200px",
-    maxHeight: "40vh",
+    overflow: "auto",
+    // minHeight: "200px",
+    maxHeight: "60vh",
+    minHeight: "20px",
+    ['@media (max-width:780px)']: { // eslint-disable-line no-useless-computed-key
+      height: '80%'
+    }
+    // paddingTop: "30px"
   },
   card: {
     minWidth: 275,
@@ -89,7 +94,9 @@ const styles = {
 class UserPage extends React.Component {
 
   state = {
-    user: {},
+    user: {
+      name: ''
+    },
     wishList: [],
     toggleEditView: true
   }
@@ -103,13 +110,27 @@ class UserPage extends React.Component {
     })
   }
 
+  handleChange = async (event) => {
+    const user = { ...this.state.user }
+    user[event.target.name] = event.target.value
+    this.setState({ user })
+  }
+
   handleToggleEdit = () => {
-    this.setState({toggleEditView: !this.state.toggleEditView})
+    this.setState({ toggleEditView: !this.state.toggleEditView })
   }
 
   handleDelete = async () => {
     const userId = this.props.match.params.userId
     axios.delete(`/api/users/${userId}`)
+    await this.getUser()
+  }
+
+  handleSubmit = async (event) => {
+    const userId = this.props.match.params.userId
+    const user = { ...this.state.user }
+    axios.put(`/api/users/${userId}`, this.state.user)
+    this.setState({ user })
     await this.getUser()
   }
 
@@ -145,50 +166,47 @@ class UserPage extends React.Component {
           <Img src={this.state.user.avatar} />
           <UserInfo>
             {this.state.user.name}
-            
-              {this.state.toggleEditView ?
-                <IconButton
-                  variant="fab"
-                  color="secondary"
-                  aria-label="Edit"
-                  className={classes.button}
-                  onClick={this.handleToggleEdit}>
-                  <EditIcon />
-                </IconButton> 
-                  :
-                  <form>
-                  <input type="text" value={this.state.user.name} />
-                  <input type='submit'/>
-                </form>
 
-              }
-            
+            {this.state.toggleEditView ?
+              <IconButton
+                variant="fab"
+                color="secondary"
+                aria-label="Edit"
+                className={classes.button}
+                onClick={this.handleToggleEdit}>
+                <EditIcon />
+              </IconButton>
+              :
+              <form>
+                <input type="text" value={this.state.user.name} name='name' onChange={this.handleChange} />
+                <input type='submit' onClick={this.handleSubmit} />
+              </form>
 
+            }
           </UserInfo>
-            <IconButton className={classes.button} aria-label="Delete">
-              <Link to={`/users`}>
-                <DeleteIcon
-                  onClick={() => this.handleDelete(userId)} />
-              </Link>
-            </IconButton>
+          <IconButton className={classes.button} aria-label="Delete">
+            <Link to={`/users`}>
+              <DeleteIcon
+                onClick={() => this.handleDelete(userId)} />
+            </Link>
+          </IconButton>
         </Body>
-          <div className={classes.bottomhalf}>
-            {wishListCard}
+        <div className={classes.bottomhalf}>
+          {wishListCard}
+        </div>
+        <div className={classes.faves}>
+          <div>
+            <Link to={`/user/${userId}/shoesiefaves`}> See Chrissys Top Picks </Link>
           </div>
-          <div className={classes.faves}>
-            <div>
-              <Link to={`/user/${userId}/shoesiefaves`}> Shoesie Faves </Link>
-            </div>
-            <div>
-
-            </div>
+          <div>
           </div>
+        </div>
       </div>
-        );
-      }
-    }
+    );
+  }
+}
 UserPage.propTypes = {
-          classes: PropTypes.object.isRequired
-      };
-      
-      export default withStyles(styles)(UserPage);
+  classes: PropTypes.object.isRequired
+};
+
+export default withStyles(styles)(UserPage);
