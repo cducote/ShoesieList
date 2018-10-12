@@ -45,6 +45,7 @@ class NewUserForm extends Component {
   }
 
   handleSubmit = async (e) => {
+    e.preventDefault()
     const response = await axios.post('/api/users', this.state.newUser)
     // call update users with new user
     const users = [ ...this.state.users ]
@@ -69,8 +70,8 @@ class NewUserForm extends Component {
                 <TextField id="input-with-icon-grid" label="Avatar Link" name='avatar' value={this.state.newUser.avatar} onChange={this.handleChange}/>
                 </Grid>
             <Grid Item>
-              <Button variant="fab" mini color="secondary" aria-label="Add" className={classes.button} type='submit' >
-                <AddIcon onClick={this.props.toggleNew}/>
+              <Button variant="fab" mini color="secondary" aria-label="Add" className={classes.button} type='submit'>
+                <AddIcon/>
               </Button>
             </Grid>
           </Grid>
