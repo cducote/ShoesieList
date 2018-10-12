@@ -38,10 +38,6 @@ const UserInfo = styled.div`
 `
 
 const styles = {
-  // root: {
-  //   background: "inherit",
-  //   height: "50vh"
-  // },
   bottomhalf: {
     background: "#f1f1f1",
     height: "40vh",

@@ -8,12 +8,20 @@ import AddIcon from '@material-ui/icons/Add';
 import axios from 'axios'
 
 
-const styles = theme => ({
-  margin: {
-    margin: theme.spacing.unit,
-  },
-});
+const styles = {
+  root: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center"
+  }
+};
 
+const formStyle = {
+  display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center"
+}
 
 class NewUserForm extends Component {
   state = {
@@ -48,10 +56,10 @@ class NewUserForm extends Component {
     const { classes } = this.props;
 
     return (
-      <div className={classes.margin}>
+      <div className={classes.root} style={formStyle}>
         <form onSubmit={this.handleSubmit}>
-          <Grid container spacing={8} alignItems="center">
-            <Grid item>
+          <Grid container spacing={8} style={formStyle}>
+            <Grid item style={formStyle}>
               <AccountCircle />
             </Grid>
             <Grid item>
