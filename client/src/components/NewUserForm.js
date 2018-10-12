@@ -33,11 +33,6 @@ class NewUserForm extends Component {
     }
   }
 
-  componentDidMount = async () => {
-    const response = await axios.get('/api/users')
-    this.setState({ users: response.data })
-  }
-
   handleChange = (e) => {
     const newUser = { ...this.state.newUser }
     newUser[e.target.name] = e.target.value
@@ -46,11 +41,8 @@ class NewUserForm extends Component {
 
   handleSubmit = async (e) => {
     e.preventDefault()
-    const response = await axios.post('/api/users', this.state.newUser)
-    // call update users with new user
-    const users = [ ...this.state.users ]
-    users.push(response.data)
-    this.setState({ users })
+    await axios.post('/api/users', this.state.newUser)
+    this.props.getUsers()
   }
 
   render() {

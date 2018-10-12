@@ -67,9 +67,13 @@ class LoginPage extends Component {
     toggleNewUserView: true
   }
 
-  componentDidMount = async () => {
+  getUsers = async() => {
     const response = await axios.get('/api/users')
     this.setState({ users: response.data })
+  }
+
+  componentDidMount = async () => {
+    await this.getUsers()
   }
 
   toggleNew = () => {
@@ -119,7 +123,7 @@ class LoginPage extends Component {
             <AddIcon />
           </Button> :
 
-          <NewUserForm/>
+          <NewUserForm getUsers={this.getUsers}/>
           }
         </AddButton>
          </div>
