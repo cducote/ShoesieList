@@ -47,60 +47,49 @@ class ShoesieFaves extends React.Component {
     const response = await axios.get(`/api/users/${userId}`)
     this.setState({
       user: response.data,
-      wishList: response.data.wishList
+      wishList: response.data
     })
   }
 
   componentDidMount = async () => {
-    this.getUser()
     const response = await axios.get('/api/shoelist/')
-    this.setState({ 
+    this.setState({
       shoes: response.data,
-     })
+    })
+    this.getUser()
   }
 
   handleAdd = async (shoe) => {
-    console.log(shoe)
     const userId = this.props.match.params.userId
-    console.log(userId)
-    const response = await axios.put(`/api/users/${userId}`, {aNewShoe: shoe._id})
-    console.log(response)
-
+    await axios.put(`/api/users/${userId}`, { aNewShoe: shoe._id })
     await this.getUser()
   }
 
-  // handleChange =  async (e, i) => {
-  //   e.preventDefault()
-  //   // const userId = this.props.match.params.userId
-  //   const wishList = [ ...this.state.user.wishList]
-  //   wishList[i][e.target.shoe] = e.target.value
-  //   this.setState({ wishList })
-  // }
   render() {
     const { classes } = this.props;
-    const userId = this.props.match.params.userId
+    // const userId = this.props.match.params.userId
     const favesList = this.state.shoes.map((shoe, i) => {
 
       return (
         <GridListTile key={i}>
-            <img src={shoe.img} alt={"A Neat Shoe"}/>
-            <GridListTileBar
-              title={shoe.brand}
-              subtitle={shoe.name}
-              actionIcon={
-                <Link to={`/user/${userId}`}>
-                <IconButton>
-                  <StarBorderIcon
-                    onClick={() => this.handleAdd(shoe)}
-                    className={classes.title}
-                    style={{ color: "#f1f1f1" }}
-                    value='shoe'
-                  />
-                </IconButton>
-                </Link>
-              }
-            />
-          </GridListTile>
+          <img src={shoe.img} alt={"A Neat Shoe"} />
+          <GridListTileBar
+            title={shoe.brand}
+            subtitle={shoe.name}
+            actionIcon={
+              // <Link to={`/user/${userId}`}>
+              <IconButton>
+                <StarBorderIcon
+                  onClick={() => this.handleAdd(shoe)}
+                  className={classes.title}
+                  style={{ color: "#f1f1f1" }}
+                  value='shoe'
+                />
+              </IconButton>
+              // </Link>
+            }
+          />
+        </GridListTile>
       )
     })
 
