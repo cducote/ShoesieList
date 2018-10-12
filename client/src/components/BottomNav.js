@@ -30,6 +30,7 @@ class BottomNav extends React.Component {
   }
 
   goBack = () => {
+    console.log(window.history)
     window.history.back()
   }
 
