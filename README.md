@@ -32,7 +32,9 @@ Once the user loads the home page, they are presented with a brief bio of the ap
 
 ## EMD & Wireframe
 
-[Imgur Link](https://imgur.com/gallery/OeVG7QT)
+[ERD Link](https://www.lucidchart.com/documents/edit/6caba0a6-5c87-45cd-bb61-010aa07e5bb5#)
+
+[Wire Frame Link](https://imgur.com/gallery/OeVG7QT)
 
 ## Future Development
 
